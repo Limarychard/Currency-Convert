@@ -5,6 +5,8 @@ const dolar = 5.20
 
 const euro = 6.13
 
+const bitcoin = 177916.99
+
 const convertValues = () => {
     const inputReais = document.getElementById('input-real').value
     const realValueText = document.getElementById('real-value-text')
@@ -18,7 +20,7 @@ const convertValues = () => {
     if (select.value === 'US$ Dólar americano') {
         currencyValueText.innerHTML = new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: 'USD'
+            currency: 'USD',
         }).format(inputReais / dolar)
     }
 
@@ -27,6 +29,14 @@ const convertValues = () => {
             style: 'currency',
             currency: 'EUR'
         }).format(inputReais / euro)
+    }
+
+    if (select.value === '₿iticoin') {
+        currencyValueText.innerHTML = new Intl.NumberFormat('de-DE', {
+            style: 'currency',
+            currency: 'BTC',
+            minimumFractionDigits: 8
+        }).format(inputReais / bitcoin)
     }
 }
 
@@ -42,6 +52,11 @@ changeCurrency = () => {
     if (select.value === '€ Euro') {
         currencyName.innerHTML = "Euro"
         currencyImg.src = './assets/euro.png'
+    }
+
+    if (select.value === '₿iticoin') {
+        currencyName.innerHTML = 'Bitcoin'
+        currencyImg.src = './assets/bitcoin.png'
     }
 
     convertValues()
