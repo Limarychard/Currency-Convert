@@ -1,16 +1,19 @@
 const button = document.getElementById('convert-button')
 const select = document.getElementById('currency-select')
 
-const dolar = 5.20
-
-const euro = 6.13
-
-const bitcoin = 177916.99
-
-const convertValues = () => {
+const convertValues = async () => {
     const inputReais = document.getElementById('input-real').value
     const realValueText = document.getElementById('real-value-text')
     const currencyValueText = document.getElementById('currency-value-text')
+
+    // async await → SÓ PODE USAR DENTRO DE UMA FUNÇÃO, PRECISO AVISAR QUE A FUNÇÃO É ASYNC
+    const data = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL").then( responseApi => responseApi.json())
+    
+    const dolar = data.USDBRL.high
+    const euro = data.EURBRL.high
+    const bitcoin = data.BTCBRL.high
+
+    console.log(data)
 
     realValueText.innerHTML = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
